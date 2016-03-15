@@ -1,0 +1,46 @@
+import programmer
+import os
+env = Environment()
+
+mcu = 'atmega328p'
+
+targetname="test"
+
+#if len(COMMAND_LINE_TARGETS):
+
+# Optimization level, can be [0, 1, 2, 3, s].
+opt = "s"
+
+env['CC'] = 'avr-gcc -mmcu='+mcu+' -O'+opt
+env.Append(CCFLAGS = "-Wall")
+env.Append(CCFLAGS = "-D_LCD_DEFINITIONS_FILE")
+env.Append(CCFLAGS = "-DF_CPU=16000000")
+
+code_files=[
+"test.c"
+]
+
+libs=[
+"can"
+]
+
+env.Append(CPPPATH=["avr-can-lib-master","avr-can-lib-master/src"])
+
+home=os.environ["HOME"]
+env.Repository("{}/src/avr".format(home))
+env.Append(CPPPATH=["{}/include/avr".format(home),"."])
+env.Append(LIBPATH=["avr-can-lib-master/src"])
+
+# Make elf
+env.Program(targetname+'.elf', code_files, LIBS=libs)
+
+# Make hex
+binary=env.Command(targetname+".hex", targetname+".elf", 'avr-objcopy -j .text -j .data -O ihex $SOURCE $TARGET')
+env.Default(binary)
+
+# Show memory usage
+env.Command(None, targetname+".hex", "avr-size $SOURCE")
+
+# Program the thing
+program=env.Command(None, targetname+".hex", 'avrdude -p {cpu} -u -U flash:w:$SOURCE {prog_flags}'.format(cpu=mcu,prog_flags=" ".join("-{} {}".format(k,v) for k,v in programmer.flags.iteritems())))
+env.Alias("program",program)
