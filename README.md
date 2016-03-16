@@ -28,7 +28,7 @@ message ends after the first byte
 ### Base frames
 ```
 ERR = 0
-BITxx = can_identifier<<18
+BITxx = can_identifier
 ```
 
 ### Extended frames
@@ -36,3 +36,7 @@ BITxx = can_identifier<<18
 ERR = 0
 BITxx = can_identifier
 ```
+
+## Used libraries
+* UART library by [Peter Fleury](http://tinyurl.com/peterfleury) (GPL)
+* [avr-can-lib](http://www.kreatives-chaos.com/artikel/universelle-can-bibliothek) by www.kreatives-chaos.com (2-clause BSD)
