@@ -17,7 +17,8 @@ env.Append(CCFLAGS = "-D_LCD_DEFINITIONS_FILE")
 env.Append(CCFLAGS = "-DF_CPU=16000000")
 
 code_files=[
-"test.c"
+"test.c",
+"fleury/uart.c"
 ]
 
 libs=[
