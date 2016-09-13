@@ -16,4 +16,8 @@ package_dev=packaging.make_debian("libserial-can-dump-dev",[
 	("include/serial_can_dump.hpp", install_prefix + "include/serial_can_dump.hpp")
 	],env, additional_dependencies="libserial-can-dump")
 
+dump = env.Program("serial_can_dump_dump", "test/dump.cpp", LIBS=["boost_system", "serial_can_dump"])
+send = env.Program("serial_can_dump_send", "test/send.cpp", LIBS=["boost_system", "serial_can_dump"])
+env.Alias("test", [dump, send])
+
 env.Alias("package",[package_lib, package_dev])
