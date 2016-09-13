@@ -41,8 +41,8 @@ private:
 	static const uint32_t ID_MASK = ~( RTR_MASK | EXT_MASK );
 
 	ReceiveSignal _onReceive;
-    boost::asio::io_service io;
-    boost::asio::serial_port serial;
+	boost::asio::io_service io;
+	boost::asio::serial_port serial;
 
 	uint8_t* getDataBuffer();
 	void handleHeader(const boost::system::error_code& error);
