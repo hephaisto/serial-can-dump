@@ -1,0 +1,3 @@
+[submodule "host/site_scons"]
+	path = host/site_scons
+	url = git@github.com:hephaisto/scons-tools.git

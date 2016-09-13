@@ -1,0 +1,6 @@
+Package: libserial-can-dump-dev
+Section: misc
+Priority: optional
+Homepage: https://github.com/hephaisto/serial-can-dump
+Description: Header files for libserial-can-dump
+Maintainer: hephaisto <hephaisto@users.noreply.github.com>

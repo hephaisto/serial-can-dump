@@ -1,0 +1,6 @@
+Package: libserial-can-dump
+Section: misc
+Priority: optional
+Homepage: https://github.com/hephaisto/serial-can-dump
+Description: Transfer CAN frames via serial. Host-Library to decode serial input.
+Maintainer: hephaisto <hephaisto@users.noreply.github.com>

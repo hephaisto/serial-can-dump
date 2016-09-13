@@ -1,0 +1,19 @@
+import packaging
+
+env=Environment(tools=["default", "textfile", git_tag_version, get_architecture_from_dpkg])
+env.Append(CCFLAGS="-std=c++11")
+env.Append(CCFLAGS="-DBOOST_ALL_DYN_LINK")
+
+library = env.SharedLibrary("serial_can_dump", ["src/serial_can_dump.cpp"])
+
+install_prefix = "/usr/local/"
+
+package_lib=packaging.make_debian("libserial-can-dump",[
+	(library, install_prefix + "lib/libserial_can_dump.so")
+	],env)
+
+package_dev=packaging.make_debian("libserial-can-dump-dev",[
+	("include/serial_can_dump.hpp", install_prefix + "include/serial_can_dump.hpp")
+	],env, additional_dependencies="libserial-can-dump")
+
+env.Alias("package",[package_lib, package_dev])
