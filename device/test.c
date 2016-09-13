@@ -13,6 +13,7 @@
 #define IN_BIT 0
 #define IN_PIN PINB
 
+
 const uint8_t can_filter[] PROGMEM = 
 {
 	MCP2515_FILTER(0),
@@ -86,15 +87,30 @@ void uart_to_can(uint8_t first_buf)
 	can_send_message(&msg);
 }
 
+void init_timer0()
+{
+	// original by david
+	/*TCCR1A=1<<COM1A0;
+	TCCR1B=1<<WGM12 | 1<<CS10;
+	OCR1A=0;*/
+
+	// timer0
+	TCCR0A=(1<<COM1A0) | (1<<WGM01);
+	TCCR0B=1<<CS10;
+	OCR1A=0;
+	DDRD|= 1<<6;
+}
 
 int main(void)
 {
+	init_timer0();
 	OUT_DDR |= (1<<OUT_BIT);
 	IN_DDR &= ~(1<<IN_BIT);
 	OUT_PORT |= (1<<OUT_BIT);
 	IN_PORT |= (1<<IN_BIT);
 
-	can_init(BITRATE_500_KBPS);
+	//can_init(BITRATE_500_KBPS);
+	can_init(BITRATE_1_MBPS); // double datarate because F_osc is 8MHz instead of 16 when using Timer0 as CLK
 	can_static_filter(can_filter);
 
 	OUT_PORT &= ~(1<<OUT_BIT);
