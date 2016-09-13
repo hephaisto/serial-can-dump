@@ -49,6 +49,7 @@ SerialCanDumpPort::SerialCanDumpPort(const std::string &device, unsigned int bau
 serial(io, device)
 {
 	serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
+	startWaitingForPacket();
 }
 
 SerialCanDumpPort::~SerialCanDumpPort()
