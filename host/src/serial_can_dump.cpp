@@ -56,6 +56,11 @@ SerialCanDumpPort::~SerialCanDumpPort()
 {
 }
 
+void SerialCanDumpPort::threadWorker()
+{
+	io.run();
+}
+
 ReceiveSignal& SerialCanDumpPort::onReceive()
 {
 	return _onReceive;

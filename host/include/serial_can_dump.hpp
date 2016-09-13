@@ -31,6 +31,7 @@ public:
 	ReceiveSignal& onReceive();
 	void send(const ExtendedCanFrame& frame);
 	void startWaitingForPacket();
+	void threadWorker();
 private:
 	static const size_t HEADER_LEN = 5;
 	static const size_t MAX_DATA_LEN = 16;
