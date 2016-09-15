@@ -32,7 +32,8 @@ int main(int argc, char **argv)
 	for(uint8_t i=0; i<data_len; i++)
 		data[i] = std::stoul(argv[4+i]);
 
-	SerialCanDumpPort port(device, std::stoul(baud));
+	boost::asio::io_service io;
+	SerialCanDumpPort port(io, device, std::stoul(baud));
 	port.send(ExtendedCanFrame(std::stoul(can_id), data_len, data));
 	delete[] data;
 	return 0;

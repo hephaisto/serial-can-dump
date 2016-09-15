@@ -26,9 +26,10 @@ int main(int argc, char **argv)
 	}
 	string device(argv[1]);
 	string baud(argv[2]);
-	SerialCanDumpPort port(device, std::stoul(baud));
+	boost::asio::io_service io;
+	SerialCanDumpPort port(io, device, std::stoul(baud));
 	port.onReceive().connect(printPacket);
 	std::cout << "ID       |len| data\n";
-	port.threadWorker();
+	port.threadWorker(io);
 	return 0;
 }

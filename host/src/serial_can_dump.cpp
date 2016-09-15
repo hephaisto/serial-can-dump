@@ -94,9 +94,8 @@ int16_t ExtendedCanFrame::getData_int16()
 	return (data[0] << 8) | (data[1]);
 }
 
-SerialCanDumpPort::SerialCanDumpPort(const std::string &device, unsigned int baud_rate)
-:io(),
-serial(io, device)
+SerialCanDumpPort::SerialCanDumpPort(boost::asio::io_service &io, const std::string &device, unsigned int baud_rate)
+:serial(io, device)
 {
 	serial.set_option(boost::asio::serial_port_base::baud_rate(baud_rate));
 	startWaitingForPacket();
@@ -106,7 +105,7 @@ SerialCanDumpPort::~SerialCanDumpPort()
 {
 }
 
-void SerialCanDumpPort::threadWorker()
+void SerialCanDumpPort::threadWorker(boost::asio::io_service &io)
 {
 	io.run();
 }

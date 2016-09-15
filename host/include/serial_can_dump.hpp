@@ -33,12 +33,12 @@ typedef bs2::signal<void (std::shared_ptr<const ExtendedCanFrame>)> ReceiveSigna
 class SerialCanDumpPort
 {
 public:
-	SerialCanDumpPort(const std::string &device, unsigned int baud_rate);
+	SerialCanDumpPort(boost::asio::io_service &io, const std::string &device, unsigned int baud_rate);
 	~SerialCanDumpPort();
 	ReceiveSignal& onReceive();
 	void send(const ExtendedCanFrame& frame);
 	void startWaitingForPacket();
-	void threadWorker();
+	void threadWorker(boost::asio::io_service &io);
 private:
 	static const size_t HEADER_LEN = 5;
 	static const size_t MAX_DATA_LEN = 16;
@@ -48,7 +48,6 @@ private:
 	static const uint32_t ID_MASK = ~( RTR_MASK | EXT_MASK );
 
 	ReceiveSignal _onReceive;
-	boost::asio::io_service io;
 	boost::asio::serial_port serial;
 
 	uint8_t* getDataBuffer();
