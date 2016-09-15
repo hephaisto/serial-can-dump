@@ -12,6 +12,7 @@ rtr(rtr)
 		this->data[i] = data[i];
 }
 
+// empty data
 ExtendedCanFrame::ExtendedCanFrame(const uint32_t id, const bool rtr)
 :id(id),
 rtr(rtr),
@@ -20,6 +21,7 @@ data(new uint8_t[0])
 {
 }
 
+// uint8_t
 ExtendedCanFrame::ExtendedCanFrame(const uint32_t id, const uint8_t data, const bool rtr)
 :id(id),
 rtr(rtr),
@@ -29,6 +31,17 @@ data(new uint8_t[1])
 	this->data[0] = data;
 }
 
+//int8_t
+ExtendedCanFrame::ExtendedCanFrame(const uint32_t id, const int8_t data, const bool rtr)
+:id(id),
+rtr(rtr),
+data_len(1),
+data(new uint8_t[1])
+{
+	this->data[0] = data;
+}
+
+// uint16_t
 ExtendedCanFrame::ExtendedCanFrame(const uint32_t id, const uint16_t data, const bool rtr)
 :id(id),
 rtr(rtr),
@@ -38,6 +51,18 @@ data(new uint8_t[2])
 	this->data[0] = data >> 8;
 	this->data[1] = data;
 }
+
+// int16_t
+ExtendedCanFrame::ExtendedCanFrame(const uint32_t id, const int16_t data, const bool rtr)
+:id(id),
+rtr(rtr),
+data_len(1),
+data(new uint8_t[2])
+{
+	this->data[0] = data >> 8;
+	this->data[1] = data;
+}
+
 
 ExtendedCanFrame::~ExtendedCanFrame()
 {

@@ -12,7 +12,9 @@ public:
 	ExtendedCanFrame(const uint32_t id, const uint8_t data_len, const uint8_t *data, const bool rtr=false);
 	ExtendedCanFrame(const uint32_t id, const bool rtr=false);
 	ExtendedCanFrame(const uint32_t id, const uint8_t data, const bool rtr=false);
+	ExtendedCanFrame(const uint32_t id, const int8_t data, const bool rtr=false);
 	ExtendedCanFrame(const uint32_t id, const uint16_t data, const bool rtr=false);
+	ExtendedCanFrame(const uint32_t id, const int16_t data, const bool rtr=false);
 
 	~ExtendedCanFrame();
 	uint32_t id;
