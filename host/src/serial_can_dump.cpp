@@ -156,7 +156,7 @@ void SerialCanDumpPort::handleHeader(const boost::system::error_code& error)
 		);
 	}
 	else
-		throw std::runtime_error("error while reading can header");
+		throw std::runtime_error("error while reading can header: "+error.message());
 }
 
 void SerialCanDumpPort::handleData(const boost::system::error_code& error)
@@ -171,7 +171,7 @@ void SerialCanDumpPort::handleData(const boost::system::error_code& error)
 		startWaitingForPacket();
 	}
 	else
-		throw std::runtime_error("error while reading can data");
+		throw std::runtime_error("error while reading can data: "+error.message());
 }
 
 
