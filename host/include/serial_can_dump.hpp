@@ -22,10 +22,10 @@ public:
 	uint8_t *data;
 	bool rtr;
 
-	uint8_t getData_uint8();
-	int8_t getData_int8();
-	uint16_t getData_uint16();
-	int16_t getData_int16();
+	uint8_t getData_uint8() const;
+	int8_t getData_int8() const;
+	uint16_t getData_uint16() const;
+	int16_t getData_int16() const;
 };
 
 typedef bs2::signal<void (std::shared_ptr<const ExtendedCanFrame>)> ReceiveSignal;

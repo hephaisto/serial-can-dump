@@ -69,25 +69,25 @@ ExtendedCanFrame::~ExtendedCanFrame()
 	delete[] data;
 }
 
-uint8_t ExtendedCanFrame::getData_uint8()
+uint8_t ExtendedCanFrame::getData_uint8() const
 {
 	if(data_len != 1)
 		throw std::runtime_error("trying to read data as uint8_t, but not length 1");
 	return data[0];
 }
-int8_t ExtendedCanFrame::getData_int8()
+int8_t ExtendedCanFrame::getData_int8() const
 {
 	if(data_len != 1)
 		throw std::runtime_error("trying to read data as int8_t, but not length 1");
 	return data[0];
 }
-uint16_t ExtendedCanFrame::getData_uint16()
+uint16_t ExtendedCanFrame::getData_uint16() const
 {
 	if(data_len != 1)
 		throw std::runtime_error("trying to read data as uint16_t, but not length 2");
 	return (data[0] << 8) | (data[1]);
 }
-int16_t ExtendedCanFrame::getData_int16()
+int16_t ExtendedCanFrame::getData_int16() const
 {
 	if(data_len != 1)
 		throw std::runtime_error("trying to read data as int16_t, but not length 2");
