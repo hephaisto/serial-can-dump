@@ -118,7 +118,7 @@ ReceiveSignal& SerialCanDumpPort::onReceive()
 void SerialCanDumpPort::send(const ExtendedCanFrame& frame)
 {
 	uint8_t buf[HEADER_LEN + MAX_DATA_LEN];
-	buf[0] = frame.id >> 24;
+	buf[0] = (frame.id | EXT_MASK | (frame.rtr ? RTR_MASK : 0)) >> 24;
 	buf[1] = frame.id >> 16;
 	buf[2] = frame.id >>  8;
 	buf[3] = frame.id >>  0;
